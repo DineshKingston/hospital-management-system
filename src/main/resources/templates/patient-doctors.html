@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Doctors List</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<div class="container">
+    <h2>Available Doctors</h2>
+
+    <div th:if="${#lists.isEmpty(doctors)}">
+        <p>No doctors available</p>
+    </div>
+
+    <table th:if="${!#lists.isEmpty(doctors)}">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Specialization</th>
+                <th>Appointment</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr th:each="doctor : ${doctors}">
+                <td th:text="${doctor.name}"></td>
+                <td th:text="${doctor.specialization}"></td>
+                <td>
+                    <form th:action="@{/patient/apply}" method="post"
+                        style="display:flex; gap:6px; align-items:center;">
+                        
+                        <input type="hidden" name="doctorId" th:value="${doctor.id}">
+                        <input type="date" name="appointmentDate" required>
+                        <input type="time" name="appointmentTime" required>
+
+                        <button type="submit" class="btn">Apply</button>
+
+                        <a th:href="@{/patient/doctor-profile/{id}(id=${doctor.id})}"
+                        class="btn">
+                        View Profile
+                        </a>
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br>
+    <a th:href="@{/patient/dashboard}" class="btn">Back</a>
+</div>
+<div th:replace="fragments/header :: body"></div>
+</body>
+</html>

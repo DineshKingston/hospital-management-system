@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+
+<div class="container">
+    <h2>Admin Dashboard</h2>
+
+    <a href="/admin/add-doctor" class="btn">➕ Add Doctor</a>
+    <a href="/admin/doctors" class="btn">👨‍⚕️ View Doctors</a>
+    <a href="/admin/logout" class="btn action-delete">Logout</a>
+</div>
+<div th:replace="fragments/header :: body"></div>
+</body>
+</html>

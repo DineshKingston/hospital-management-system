@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Patient Profile</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+
+<div class="container">
+    <h2>Patient Profile</h2>
+
+    <p><b>Name :</b> <span th:text="${patient.name}"></span></p>
+    <p><b>Email :</b> <span th:text="${patient.email}"></span></p>
+    <p><b>Age :</b> <span th:text="${patient.age}"></span></p>
+
+    <br>
+    <a th:href="@{/doctor/dashboard/{id}(id=${session.doctor.id})}" class="btn">
+        Back
+    </a>
+</div>
+
+<div th:replace="fragments/header :: body"></div>
+</body>
+</html>

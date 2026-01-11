@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Doctor Dashboard</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+
+<div class="container">
+    <h2>Welcome Dr.<span th:text="${doctor.name}"></span></h2>
+
+    <p>Specialization: <span th:text="${doctor.specialization}"></span></p>
+
+    <hr>
+
+    <!-- View Appointments -->
+    <a th:href="@{/doctor/appointments}" class="btn">
+    View Appointments</a>
+
+    <!-- View Requests -->
+    <a th:href="@{/doctor/requests/{id}(id=${doctor.id})}"
+    class="btn"
+    style="position:relative;">
+
+    View Requests
+
+    <span th:if="${pendingCount > 0}"
+        style="
+            position:absolute;
+            top:-8px;
+            right:-8px;
+            background:red;
+            color:white;
+            border-radius:50%;
+            padding:4px 8px;
+            font-size:12px;
+            font-weight:bold;">
+        <span th:text="${pendingCount}"></span>
+    </span>
+    </a>
+
+
+    <a th:href="@{/doctor/change-password}" class="btn">Change Password</a>
+
+    <a th:href="@{/doctor/logout}" class="btn action-delete">Logout</a>
+</div>
+<div th:replace="fragments/header :: body"></div>
+</body>
+</html>

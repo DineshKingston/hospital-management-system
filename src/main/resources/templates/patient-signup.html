@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Patient Signup</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+
+<div class="container">
+    <h2>Patient Signup</h2>
+
+    <p style="color:red" th:text="${error}"></p>
+
+    <form th:action="@{/patient/signup}" th:object="${patient}" method="post" class="book-form">
+
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" th:field="*{name}" required>
+        </div>
+
+        <div class="form-group">
+            <label>Email</label>
+            <input type="text" th:field="*{email}" required>
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input type="text" th:field="*{password}" required>
+        </div>
+
+        <div class="form-group">
+            <label>Age</label>
+            <input type="number" th:field="*{age}" required>
+        </div>
+
+        <div class="form-group">
+            <label>Gender</label>
+            <input type="text" th:field="*{gender}" required>
+        </div>
+
+        <div class="form-group">
+            <label>Phone</label>
+            <input type="text" th:field="*{phone}" required>
+        </div>
+
+        <button type="submit">Create Account</button>
+    </form>
+
+</div>
+<div th:replace="fragments/header :: body"></div>
+</body>
+</html>

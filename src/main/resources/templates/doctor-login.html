@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Doctor Login</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+
+<div class="container">
+    <h2>Doctor Login</h2>
+
+    <p style="color:red" th:text="${error}"></p>
+
+    <form th:action="@{/doctor/login}" method="post" class="book-form">
+
+        <div class="form-group">
+            <label>Email</label>
+            <input type="text" name="email" required>
+        </div>
+
+        <div class="form-group">
+            <label>Password</label>
+            <input type="text" name="password" required>
+        </div>
+
+        <button type="submit">Login</button>
+    </form>
+</div>
+<div th:replace="fragments/header :: body"></div>
+</body>
+</html>

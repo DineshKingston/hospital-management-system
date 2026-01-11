@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Appointment Requests</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+
+<div class="container">
+    <h2>Appointment Requests</h2>
+
+    <p th:if="${#lists.isEmpty(requests)}" style="text-align:center;">
+        No appointment requests
+    </p>
+
+    <table th:if="${!#lists.isEmpty(requests)}">
+        <tr>
+            <th>Patient ID</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Status</th>  
+            <th>Action</th>
+        </tr>
+
+        <tr th:each="r : ${requests}">
+            <td th:text="${r.patientName != null ? r.patientName : r.patientId}"></td>
+
+            <td th:text="${r.appointmentDate}"></td>
+            <td th:text="${r.appointmentTime}"></td>
+
+            <td>
+                <span th:text="${r.status}"
+                    th:classappend="
+                        ${r.status == 'PENDING'} ? ' status-pending' :
+                        (${r.status == 'ACCEPTED'} ? ' status-available' :
+                        ' status-issued')
+                    ">
+                </span>
+            </td>
+
+            <td th:if="${r.status == 'PENDING'}">
+                <form th:action="@{/doctor/accept}" method="post" style="display:inline;">
+                    <input type="hidden" name="appointmentId" th:value="${r.id}">
+                    <input type="hidden" name="doctorId" th:value="${doctorId}">
+                    <button class="btn">Accept</button>
+                </form>
+
+                <form th:action="@{/doctor/reject}" method="post" style="display:inline;">
+                    <input type="hidden" name="appointmentId" th:value="${r.id}">
+                    <input type="hidden" name="doctorId" th:value="${doctorId}">
+                    <button class="btn action-delete">Reject</button>
+                </form>
+                
+            </td>
+
+            <td th:if="${r.status != 'PENDING'}">—</td>
+        </tr>
+    </table>
+
+    <br>
+    <a th:href="@{/doctor/dashboard/{id}(id=${doctorId})}" class="btn">⬅ Back</a>
+</div>
+<div th:replace="fragments/header :: body"></div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>My Appointments</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+
+<div class="container">
+    <h2>My Appointments</h2>
+
+    <!-- Empty message -->
+    <p th:if="${#lists.isEmpty(appointments)}">
+        No appointments found
+    </p>
+
+    <!-- Appointments table -->
+    <table th:if="${!#lists.isEmpty(appointments)}">
+        <thead>
+            <tr>
+                <th>Doctor</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Action</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="a : ${appointments}">
+            <td th:text="${a.doctorName != null ? a.doctorName : 'Doctor'}"></td>
+            <td th:text="${a.appointmentDate}"></td>
+            <td th:text="${a.appointmentTime}"></td>
+
+            <!-- Action -->
+            <td>
+                <a th:if="${a.status == 'PENDING'}"
+                   th:href="@{/patient/cancel/{id}(id=${a.id})}"
+                   onclick="return confirm('Cancel this appointment?')">
+                    Cancel
+                </a>
+                <span th:if="${a.status != 'PENDING'}">—</span>
+            </td>
+
+            <!-- Status -->
+            <td>
+                <span th:text="${a.status}"></span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <br>
+    <a th:href="@{/patient/dashboard}">⬅ Back</a>
+</div>
+
+<div th:replace="fragments/header :: body"></div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Doctor Appointments</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+
+<div class="container">
+    <h2>My Appointments</h2>
+
+    <p th:if="${#lists.isEmpty(appointments)}" style="text-align:center;">
+        No appointments found
+    </p>
+
+    <table th:if="${!#lists.isEmpty(appointments)}">
+        <tr>
+            <th>Patient Name</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Status</th>
+        </tr>
+
+        <tr th:each="a : ${appointments}">
+            <td th:text="${a.patientName != null ? a.patientName : a.patientId}"></td>
+            <td th:text="${a.appointmentDate}"></td>
+            <td th:text="${a.appointmentTime}"></td>
+            <td th:text="${a.status}"></td>
+        </tr>
+    </table>
+
+    <br>
+    <a th:href="@{/doctor/dashboard/{id}(id=${doctor.id})}" class="btn">
+        ⬅ Back
+    </a>
+</div>
+<div th:replace="fragments/header :: body"></div>
+</body>
+</html>

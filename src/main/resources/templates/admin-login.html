@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Login</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+
+<div class="container">
+    <h2>Admin Login</h2>
+
+    <p style="color:red" th:text="${error}"></p>
+
+    <form th:action="@{/admin/login}" method="post">
+        <input type="email" name="email" placeholder="Admin Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button class="btn">Login</button>
+    </form>
+</div>
+<div th:replace="fragments/header :: body"></div>
+</body>
+</html>

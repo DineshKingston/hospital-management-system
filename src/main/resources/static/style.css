@@ -1,0 +1,928 @@
+/* ================= RESET ================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ================= CUSTOM PROPERTIES (LIGHT MODE) ================= */
+:root {
+    /* Primary Healthcare Colors */
+    --primary-blue: #2563eb;
+    --primary-teal: #14b8a6;
+    --accent-purple: #8b5cf6;
+    --success-green: #10b981;
+    --danger-red: #ef4444;
+    --warning-yellow: #f59e0b;
+    
+    /* Light Mode Colors */
+    --bg-gradient: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #f5f3ff 100%);
+    --container-bg: rgba(255, 255, 255, 0.95);
+    --container-border: rgba(255, 255, 255, 0.8);
+    --text-primary: #1e293b;
+    --text-secondary: #334155;
+    --text-muted: #64748b;
+    
+    --input-bg: #ffffff;
+    --input-border: #e2e8f0;
+    --input-focus: #14b8a6;
+    
+    --form-bg: #f8fafc;
+    --table-hover: #f1f5f9;
+    --border-color: #e2e8f0;
+    
+    /* Shadows */
+    --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.04);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+    --shadow-glow: 0 4px 20px rgba(37, 99, 235, 0.2);
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, #2563eb 0%, #14b8a6 100%);
+    --gradient-accent: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%);
+    --gradient-danger: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+    
+    /* Border Radius */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-full: 999px;
+}
+
+/* ================= DARK MODE ================= */
+[data-theme="dark"] {
+    /* Dark Mode Colors */
+    --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #1e1b4b 100%);
+    --container-bg: rgba(30, 41, 59, 0.95);
+    --container-border: rgba(51, 65, 85, 0.8);
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    
+    --input-bg: #1e293b;
+    --input-border: #334155;
+    --input-focus: #14b8a6;
+    
+    --form-bg: #0f172a;
+    --table-hover: #334155;
+    --border-color: #334155;
+    
+    /* Dark Mode Shadows */
+    --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+    --shadow-glow: 0 4px 20px rgba(20, 184, 166, 0.3);
+}
+
+/* ================= THEME TOGGLE BUTTON ================= */
+.theme-toggle {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    background: var(--gradient-primary);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    font-size: 16px;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.05) rotate(10deg);
+    box-shadow: var(--shadow-glow);
+}
+
+.theme-toggle:active {
+    transform: scale(0.95);
+}
+
+/* Sun and Moon Icons */
+.theme-toggle::before {
+    content: "🌙";
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .theme-toggle::before {
+    content: "☀️";
+}
+
+/* ================= BODY ================= */
+body {
+    font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    background: var(--bg-gradient);
+    color: var(--text-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    line-height: 1.6;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ================= CONTAINER ================= */
+.container {
+    width: 100%;
+    max-width: 900px;
+    background: var(--container-bg);
+    backdrop-filter: blur(10px);
+    padding: 32px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--container-border);
+    animation: fadeInUp 0.5s ease-out;
+    transition: all 0.3s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ================= HEADINGS ================= */
+h1, h2 {
+    text-align: center;
+    margin-bottom: 24px;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+h1 {
+    font-size: 2.25rem;
+}
+
+h2 {
+    font-size: 1.875rem;
+}
+
+/* ================= DASHBOARD INFO ================= */
+.container p {
+    text-align: center;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    font-size: 15px;
+}
+
+.container p span {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* ================= FORMS ================= */
+form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.book-form {
+    background: var(--form-bg);
+    padding: 28px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+}
+
+/* Modern Grid Form Layout (2 columns) - for Add Doctor form */
+form:not(.book-form):not([method="post"][action*="login"]) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+form:not(.book-form):not([method="post"][action*="login"]) input[type="text"],
+form:not(.book-form):not([method="post"][action*="login"]) input[type="email"],
+form:not(.book-form):not([method="post"][action*="login"]) input[type="password"],
+form:not(.book-form):not([method="post"][action*="login"]) input[type="number"] {
+    padding: 14px 18px;
+    border-radius: var(--radius-sm);
+    border: 2px solid var(--input-border);
+    font-size: 15px;
+    transition: all 0.2s ease;
+    background: var(--input-bg);
+    color: var(--text-primary);
+    width: 100%;
+}
+
+form:not(.book-form):not([method="post"][action*="login"]) input::placeholder {
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+form:not(.book-form):not([method="post"][action*="login"]) button[type="submit"] {
+    grid-column: 1 / -1;
+    width: fit-content;
+    padding: 14px 48px;
+    margin: 8px auto 0;
+    justify-self: center;
+}
+
+/* Login Forms - Vertical Layout (One Below Another) */
+form[method="post"][action*="login"] {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+form[method="post"][action*="login"] input[type="text"],
+form[method="post"][action*="login"] input[type="email"],
+form[method="post"][action*="login"] input[type="password"] {
+    padding: 14px 18px;
+    border-radius: var(--radius-sm);
+    border: 2px solid var(--input-border);
+    font-size: 15px;
+    transition: all 0.2s ease;
+    background: var(--input-bg);
+    color: var(--text-primary);
+    width: 100%;
+}
+
+form[method="post"][action*="login"] input::placeholder {
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+form[method="post"][action*="login"] button {
+    width: fit-content;
+    padding: 14px 56px;
+    margin: 8px auto 0;
+    display: block;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--text-primary);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+input[type="time"] {
+    padding: 12px 14px;
+    border-radius: var(--radius-sm);
+    border: 2px solid var(--input-border);
+    font-size: 15px;
+    transition: all 0.2s ease;
+    background: var(--input-bg);
+    color: var(--text-primary);
+}
+
+input:focus {
+    border-color: var(--input-focus);
+    box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.12);
+    outline: none;
+}
+
+input::placeholder {
+    color: var(--text-muted);
+}
+
+/* ================= BUTTONS ================= */
+button,
+a.btn {
+    display: inline-block;
+    padding: 11px 24px;
+    border-radius: var(--radius-full);
+    border: none;
+    background: var(--gradient-primary);
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+    letter-spacing: 0.3px;
+    margin: 6px;
+}
+
+button:hover,
+a.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+}
+
+button:active,
+a.btn:active {
+    transform: translateY(0);
+}
+
+/* Full width button for book-form */
+.book-form button[type="submit"] {
+    width: 100%;
+    margin-top: 8px;
+    padding: 14px;
+    font-size: 15px;
+}
+
+/* Centered buttons */
+button.btn {
+    padding: 14px 48px;
+    font-size: 15px;
+}
+
+/* Action Buttons */
+.action-delete {
+    background: var(--gradient-danger);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+}
+
+.action-delete:hover {
+    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.3);
+}
+
+/* ================= HR DIVIDER ================= */
+hr {
+    margin: 24px 0;
+    border: none;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+}
+
+/* ================= SEARCH BOX ================= */
+.search-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.search-box input {
+    width: 300px;
+    padding: 12px 18px;
+    border-radius: var(--radius-full);
+    border: 2px solid var(--input-border);
+    font-size: 14px;
+    transition: all 0.2s ease;
+    background: var(--input-bg);
+    color: var(--text-primary);
+}
+
+.search-box input:focus {
+    width: 340px;
+}
+
+/* ================= TABLE ================= */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: var(--input-bg);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+}
+
+thead {
+    background: var(--gradient-accent);
+}
+
+th {
+    color: #ffffff;
+    padding: 16px 16px;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-weight: 700;
+    text-align: left;
+}
+
+th:last-child {
+    text-align: center;
+}
+
+td {
+    padding: 20px 16px;
+    border-bottom: 1px solid var(--border-color);
+    text-align: left;
+    background: var(--input-bg);
+    color: var(--text-primary);
+    font-size: 15px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    vertical-align: middle;
+}
+
+td:last-child {
+    text-align: center;
+}
+
+/* Table cells with buttons */
+td form,
+td a.btn {
+    margin: 0;
+}
+
+/* Inline forms in table cells */
+td form[style*="display:flex"] {
+    display: flex !important;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+}
+
+td form[style*="display:flex"] input[type="password"] {
+    padding: 8px 12px;
+    font-size: 13px;
+    min-width: 140px;
+    max-width: 180px;
+    border-radius: var(--radius-sm);
+    border: 2px solid var(--input-border);
+    background: var(--input-bg);
+    color: var(--text-primary);
+}
+
+td form[style*="display:flex"] button {
+    padding: 8px 20px;
+    font-size: 13px;
+    margin: 0;
+    white-space: nowrap;
+}
+
+/* Center buttons in table cells */
+td > a.btn {
+    display: inline-block;
+    padding: 8px 20px;
+    font-size: 13px;
+    margin: 0;
+}
+
+tbody tr {
+    transition: all 0.2s ease;
+}
+
+tbody tr:hover {
+    background: var(--table-hover);
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* ================= STATUS BADGES ================= */
+.status-pending {
+    background: #fff3cd;
+    color: #856404;
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    font-size: 12px;
+    display: inline-block;
+}
+
+.status-available {
+    background: #d4edda;
+    color: #155724;
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    font-size: 12px;
+    display: inline-block;
+}
+
+.status-issued {
+    background: #f8d7da;
+    color: #721c24;
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    font-size: 12px;
+    display: inline-block;
+}
+
+[data-theme="dark"] .status-pending {
+    background: rgba(245, 158, 11, 0.2);
+    color: #fbbf24;
+}
+
+[data-theme="dark"] .status-available {
+    background: rgba(16, 185, 129, 0.2);
+    color: #34d399;
+}
+
+[data-theme="dark"] .status-issued {
+    background: rgba(239, 68, 68, 0.2);
+    color: #f87171;
+}
+
+/* ================= PAGINATION ================= */
+.pagination {
+    margin-top: 24px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.pagination .btn {
+    padding: 8px 16px;
+    margin: 3px;
+    background: var(--input-bg);
+    color: var(--primary-blue);
+    border: 2px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+}
+
+.pagination .btn:hover {
+    background: var(--gradient-primary);
+    color: white;
+    border-color: transparent;
+}
+
+.active-page {
+    background: var(--gradient-primary) !important;
+    color: white !important;
+    border-color: transparent !important;
+}
+
+/* ================= MODAL ================= */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    background: var(--container-bg);
+    width: 400px;
+    max-width: 90%;
+    padding: 32px;
+    border-radius: var(--radius-lg);
+    text-align: center;
+    margin: 10% auto;
+    box-shadow: var(--shadow-lg);
+    animation: scaleIn 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+    gap: 10px;
+}
+
+/* ================= LINKS ================= */
+a {
+    color: var(--primary-blue);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--primary-teal);
+    text-decoration: underline;
+}
+
+/* ================= DASHBOARD ACTIONS ================= */
+.container > a.btn {
+    display: block;
+    max-width: 320px;
+    margin: 12px auto;
+    text-align: center;
+}
+
+/* Center buttons container */
+.container > br + a.btn {
+    display: block;
+    max-width: 320px;
+    margin: 20px auto 12px;
+}
+
+/* ================= FORM ACTIONS (inline forms in tables) ================= */
+form[style*="display:inline"],
+form[style*="display:flex"] {
+    margin: 0;
+}
+
+td form {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+td form input[type="date"],
+td form input[type="time"] {
+    padding: 10px 14px;
+    font-size: 14px;
+    min-width: 140px;
+    border-radius: var(--radius-sm);
+    border: 2px solid var(--input-border);
+    background: var(--input-bg);
+    transition: all 0.2s ease;
+    color: var(--text-primary);
+}
+
+td form input[type="date"]:focus,
+td form input[type="time"]:focus {
+    border-color: var(--input-focus);
+    box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.12);
+}
+
+td form button {
+    padding: 10px 32px;
+    font-size: 14px;
+    margin: 0;
+    min-width: 120px;
+    font-weight: 600;
+}
+
+/* ================= EMPTY STATE ================= */
+p[style*="text-align:center"] {
+    padding: 32px 16px;
+    color: var(--text-secondary);
+    font-size: 15px;
+}
+
+/* ================= FIX FOR PATIENT APPOINTMENTS TABLE ================= */
+
+/* Ensure Action column buttons are styled properly */
+td > a:not(.btn) {
+    display: inline-block;
+    padding: 8px 20px;
+    border-radius: var(--radius-full);
+    background: var(--gradient-primary);
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 13px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+    margin: 0;
+}
+
+td > a:not(.btn):hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+}
+
+/* For Delete/Cancel buttons specifically */
+td > a[onclick*="confirm"] {
+    background: var(--gradient-danger);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+}
+
+td > a[onclick*="confirm"]:hover {
+    box-shadow: 0 6px 20px rgba(239, 68, 68, 0.3);
+}
+
+/* Status column styling */
+td > span:not([class*="status"]) {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    font-size: 12px;
+}
+
+/* Add specific status styling when class not applied */
+td:nth-child(5) > span {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    font-size: 12px;
+}
+
+/* Ensure Action and Status columns have proper width */
+th:nth-child(4), 
+td:nth-child(4) {
+    text-align: center;
+    min-width: 120px;
+}
+
+th:nth-child(5), 
+td:nth-child(5) {
+    text-align: center;
+    min-width: 120px;
+}
+
+/* Make sure dash doesn't collapse the column */
+td > span {
+    min-width: 20px;
+    display: inline-block;
+    text-align: center;
+}
+
+/* ================= MOBILE RESPONSIVE ================= */
+@media (max-width: 768px) {
+    .theme-toggle {
+        width: 36px;
+        height: 36px;
+        top: 12px;
+        right: 12px;
+    }
+    
+    .theme-toggle::before {
+        font-size: 16px;
+    }
+    
+    .container {
+        padding: 24px;
+        margin: 8px;
+    }
+    
+    h1 {
+        font-size: 1.75rem;
+    }
+    
+    h2 {
+        font-size: 1.5rem;
+    }
+    
+    .book-form {
+        padding: 20px;
+    }
+    
+    /* Make grid forms single column on mobile */
+    form:not(.book-form):not([method="post"][action*="login"]) {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+    
+    form:not(.book-form):not([method="post"][action*="login"]) button[type="submit"] {
+        width: 100%;
+        padding: 14px 24px;
+    }
+    
+    /* Login forms stay vertical */
+    form[method="post"][action*="login"] button {
+        width: 100%;
+        padding: 14px 24px;
+    }
+    
+    .search-box {
+        flex-direction: column;
+    }
+    
+    .search-box input {
+        width: 100%;
+    }
+    
+    .search-box input:focus {
+        width: 100%;
+    }
+    
+    table {
+        font-size: 13px;
+    }
+    
+    th, td {
+        padding: 12px 8px;
+    }
+    
+    th {
+        font-size: 10px;
+    }
+    
+    /* Stack form elements in table on mobile */
+    td form[style*="display:flex"] {
+        flex-direction: column;
+        gap: 6px;
+    }
+    
+    td form[style*="display:flex"] input[type="password"] {
+        width: 100%;
+        min-width: auto;
+        max-width: none;
+    }
+    
+    td form[style*="display:flex"] button,
+    td > a.btn {
+        width: 100%;
+        padding: 8px 16px;
+    }
+    
+    button,
+    a.btn {
+        padding: 10px 20px;
+        font-size: 13px;
+    }
+    
+    .pagination {
+        gap: 4px;
+    }
+    
+    .pagination .btn {
+        padding: 7px 12px;
+        font-size: 12px;
+    }
+    
+    td form {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    td form input[type="date"],
+    td form input[type="time"] {
+        width: 100%;
+        min-width: auto;
+    }
+    
+    td form button {
+        width: 100%;
+        min-width: auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 20px 16px;
+    }
+    
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    h2 {
+        font-size: 1.25rem;
+    }
+    
+    .book-form {
+        padding: 16px;
+    }
+    
+    .modal-content {
+        padding: 24px 16px;
+    }
+    
+    .modal-actions {
+        flex-direction: column;
+    }
+    
+    th, td {
+        padding: 8px 6px;
+        font-size: 11px;
+    }
+    
+    .status-pending,
+    .status-available,
+    .status-issued {
+        padding: 3px 8px;
+        font-size: 10px;
+    }
+}
